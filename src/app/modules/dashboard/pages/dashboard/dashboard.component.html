@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>Dashboard</h1>
+
+  <div *ngIf="(statistics | async) as data">
+    <p>
+      <span>Total customers:</span>
+      <span>{{ data.customers }}</span>
+    </p>
+
+    <p>
+      <span>New customers:</span>
+      <span>{{ data.customers }}</span>
+    </p>
+
+    <p>
+      <span>Total products:</span>
+      <span>{{ data.customers }}</span>
+    </p>
+
+    <p>
+      <span>New products:</span>
+      <span>{{ data.customers }}</span>
+    </p>
+  </div>
+
+</div>

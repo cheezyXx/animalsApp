@@ -1,0 +1,74 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h1>Animals - Registration</h1>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" type="email" />
+
+    <mat-error *ngIf="email?.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+
+    <mat-error *ngIf="email?.hasError('email')">
+      Please enter a valid email address
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>First name</mat-label>
+    <input matInput formControlName="firstName" />
+    <mat-error *ngIf="firstName?.hasError('required')">
+      First name is <strong>required</strong>
+    </mat-error>
+
+    <mat-error *ngIf="firstName?.hasError('minlength')">
+      First name must be at least 2 characters long
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Last name</mat-label>
+    <input matInput formControlName="lastName" />
+    <mat-error *ngIf="lastName?.hasError('required')">
+      Last name is <strong>required</strong>
+    </mat-error>
+
+    <mat-error *ngIf="firstName?.hasError('minlength')">
+      Last name must be at least 2 characters long
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password" type="password" />
+    <mat-error *ngIf="password?.hasError('required')">
+      Password is <strong>required</strong>
+    </mat-error>
+
+    <mat-error *ngIf="password?.hasError('minlength')">
+      Password must be at least 8 characters long
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Repeat password</mat-label>
+    <input matInput formControlName="repeatPassword" type="password" />
+    <mat-error *ngIf="repeatPassword?.hasError('required')">
+      Repeat password is <strong>required</strong>
+    </mat-error>
+
+    <mat-error *ngIf="repeatPassword?.hasError('minlength')">
+      Repeat password must be at least 8 characters long
+    </mat-error>
+
+    <mat-error *ngIf="form?.hasError('differentPasswords')">
+      Passwords must be the same
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" [disabled]="form.invalid">Register</button>
+
+  <div class="password">
+    <a mat-button [routerLink]="['/login']">Already have account?</a>
+  </div>
+</form>

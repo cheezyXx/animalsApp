@@ -1,0 +1,19 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h1>Animals - Login</h1>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Username</mat-label>
+    <input matInput type="username" formControlName="username" />
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="password" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" [disabled]="form.invalid">Login</button>
+
+  <div class="password">
+    <a mat-button [routerLink]="['/register']">Don't have an account?</a>
+  </div>
+</form>

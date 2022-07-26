@@ -1,0 +1,11 @@
+.container {
+  padding: 1rem;
+}
+
+p {
+  > span {
+    &:first-child {
+      
+    }
+  }
+}

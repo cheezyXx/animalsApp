@@ -1,0 +1,38 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  box-sizing: inherit;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+form {
+  display: flex;
+  flex-flow: column wrap;
+  max-width: 350px;
+  background-color: #c8dceb;
+  padding: 2rem 1rem;
+  border-radius: 5px;
+  width: 100%;
+
+  > h1 {
+    text-align: center;
+  }
+}
+
+button {
+  margin-top: 1rem;
+}
+
+.password {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
