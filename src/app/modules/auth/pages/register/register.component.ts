@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Router } from "@angular/router";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {Router} from "@angular/router";
+import {FormBuilder, Validators} from "@angular/forms";
 
-import { RegisterService } from "../../services/register.service";
-import { FormBuilder, Validators } from "@angular/forms";
-import { checkPasswords } from "../../../../common/validators";
+import {RegisterService} from "../../services/register.service";
+import {checkPasswords} from "../../../../common/validators";
+import {take} from "rxjs";
 
 export type UserRegister = {
   firstName: string;
@@ -21,11 +22,11 @@ export type UserRegister = {
 export class RegisterComponent {
   form = this.formBuilder.nonNullable.group(
     {
-      firstName: ["", [Validators.required, Validators.minLength(2)]],
-      lastName: ["", [Validators.required, Validators.minLength(2)]],
-      email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required, Validators.minLength(8)]],
-      repeatPassword: ["", [Validators.required, Validators.minLength(8)]],
+      firstName: ["Tomas", [Validators.required, Validators.minLength(2)]],
+      lastName: ["Svojanovsky", [Validators.required, Validators.minLength(2)]],
+      email: ["olivius@gmail.com", [Validators.required, Validators.email]],
+      password: ["123456789", [Validators.required, Validators.minLength(8)]],
+      repeatPassword: ["123456789", [Validators.required, Validators.minLength(8)]],
     },
     {
       validators: [checkPasswords],
@@ -60,8 +61,17 @@ export class RegisterComponent {
   }
 
   async onSubmit() {
-    // @TODO register
+    const {value} = this.form;
 
-    await this.router.navigate(["login"]);
+    this.registerService.register({
+      firstName: value.firstName || "",
+      lastName: value.lastName || "",
+      email: value.email || "",
+      password: value.password || "",
+    })
+      .pipe(take(1))
+      .subscribe(async () => {
+        await this.router.navigate(["login"]);
+      });
   }
 }

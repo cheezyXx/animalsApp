@@ -1,26 +1,6 @@
 <div class="container">
-  <h1>Dashboard</h1>
+  <h1>Epic todo list</h1>
+  <h2>You have 2 todo</h2>
 
-  <div *ngIf="(statistics | async) as data">
-    <p>
-      <span>Total customers:</span>
-      <span>{{ data.customers }}</span>
-    </p>
-
-    <p>
-      <span>New customers:</span>
-      <span>{{ data.customers }}</span>
-    </p>
-
-    <p>
-      <span>Total products:</span>
-      <span>{{ data.customers }}</span>
-    </p>
-
-    <p>
-      <span>New products:</span>
-      <span>{{ data.customers }}</span>
-    </p>
-  </div>
-
+  <app-todo-list></app-todo-list>
 </div>

@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Router } from "@angular/router";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
+import {Router} from "@angular/router";
 import { FormBuilder, Validators } from "@angular/forms";
 
-import { LoginService } from "../../services/login.service";
-import { take } from "rxjs";
+import {LoginService} from "../../services/login.service";
+import {catchError, take, throwError} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -13,25 +13,33 @@ import { take } from "rxjs";
 })
 export class LoginComponent {
   form = this.formBuilder.group({
-    username: ["", [Validators.required]],
-    password: ["", [Validators.required]],
+    email: ["oliviggus@gmail.com", [Validators.required]],
+    password: ["123456789", [Validators.required]],
   });
 
   constructor(
     private loginService: LoginService,
     private formBuilder: FormBuilder,
     private router: Router,
-    ) {
+    private cd: ChangeDetectorRef,
+  ) {
   }
 
   async onSubmit() {
     const { value } = this.form;
 
     this.loginService.login({
-      username: "admin",
-      password: "123456",
+      email: value.email || "",
+      password: value.password || "",
     })
-      .pipe(take(1))
+      .pipe(
+        catchError(err => {
+          this.form.markAsUntouched();
+          this.cd.markForCheck();
+          return throwError(err);
+        }),
+        take(1),
+      )
       .subscribe(async () => {
         await this.router.navigateByUrl("/dashboard");
       });
